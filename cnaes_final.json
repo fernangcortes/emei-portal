@@ -1,0 +1,792 @@
+[
+  {
+    "code": "4724-5/00",
+    "description": "COMÉRCIO VAREJISTA DE HORTIFRUTIGRANJEIROS N",
+    "category": "Alimentação"
+  },
+  {
+    "code": "5310-5/02",
+    "description": "ATIVIDADES DE FRANQUEADAS DO CORREIO NACIONAL",
+    "category": "Outros"
+  },
+  {
+    "code": "6399-2/00",
+    "description": "OUTRAS ATIVIDADES DE PRESTAÇÃO DE SERVIÇOS DE INFORMAÇÃO NÃO ESPECIFICADAS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "2599-3/01",
+    "description": "SERVIÇOS DE CONFECÇÃO DE ARMAÇÕES METÁLICAS PARA A CONSTRUÇÃO",
+    "category": "Construção Civil"
+  },
+  {
+    "code": "2391-5/03",
+    "description": "APARELHAMENTO DE PLACAS E EXECUÇÃO DE TRABALHOS EM MÁRMORE, GRANITO, ARDÓSIA E OUTRAS PEDRAS",
+    "category": "Outros"
+  },
+  {
+    "code": "4930-2/02",
+    "description": "TRANSPORTE RODOVIÁRIO DE CARGA, EXCETO PRODUTOS PERIGOSOS E MUDANÇAS, INTERMUNICIPAL, INTERESTADUAL E INTERNACIONAL",
+    "category": "Transporte"
+  },
+  {
+    "code": "3811-4/00",
+    "description": "COLETA DE RESÍDUOS NÃO PERIGOSOS S",
+    "category": "Outros"
+  },
+  {
+    "code": "4789-0/04",
+    "description": "COMÉRCIO VAREJISTA DE ANIMAIS VIVOS E DE ARTIGOS E ALIMENTOS PARA ANIMAIS DE ESTIMAÇÃO",
+    "category": "Alimentação"
+  },
+  {
+    "code": "4763-6/04",
+    "description": "COMÉRCIO VAREJISTA DE ARTIGOS DE CAÇA, PESCA E CAMPING",
+    "category": "Comércio"
+  },
+  {
+    "code": "4755-5/03",
+    "description": "COMERCIO VAREJISTA DE ARTIGOS DE CAMA, MESA E BANHO",
+    "category": "Comércio"
+  },
+  {
+    "code": "4759-8/01",
+    "description": "COMÉRCIO VAREJISTA DE ARTIGOS DE TAPEÇARIA, CORTINAS E PERSIANAS",
+    "category": "Comércio"
+  },
+  {
+    "code": "4781-4/00",
+    "description": "COMÉRCIO VAREJISTA DE ARTIGOS DO VESTUÁRIO E ACESSÓRIOS",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4789-0/08",
+    "description": "COMÉRCIO VAREJISTA DE ARTIGOS FOTOGRÁFICOS E PARA FILMAGEM",
+    "category": "Comércio"
+  },
+  {
+    "code": "4773-3/00",
+    "description": "COMÉRCIO VAREJISTA DE ARTIGOS MÉDICOS E ORTOPÉDICOS",
+    "category": "Saúde e Bem-Estar"
+  },
+  {
+    "code": "4763-6/03",
+    "description": "COMÉRCIO VAREJISTA DE BICICLETAS E TRICICLOS; PEÇAS E ACESSÓRIOS",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4789-0/01",
+    "description": "COMÉRCIO VAREJISTA DE SUVENIRES, BIJUTERIAS E ARTESANATOS",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "4763-6/01",
+    "description": "COMÉRCIO VAREJISTA DE BRINQUEDOS E ARTIGOS RECREATIVOS",
+    "category": "Comércio"
+  },
+  {
+    "code": "4744-0/04",
+    "description": "COMÉRCIO VAREJISTA DE CAL, AREIA, PEDRA BRITADA, TIJOLOS E TELHAS",
+    "category": "Construção Civil"
+  },
+  {
+    "code": "4729-6/99",
+    "description": "COMÉRCIO VAREJISTA DE PRODUTOS ALIMENTÍCIOS EM GERAL OU ESPECIALIZADO EM PRODUTOS ALIMENTÍCIOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Comércio"
+  },
+  {
+    "code": "4772-5/00",
+    "description": "COMÉRCIO VAREJISTA DE COSMÉTICOS, PRODUTOS DE PERFUMARIA E DE HIGIENE PESSOAL",
+    "category": "Beleza e Estética"
+  },
+  {
+    "code": "4762-8/00",
+    "description": "COMÉRCIO VAREJISTA DE DISCOS, CDS, DVDS E FITAS",
+    "category": "Comércio"
+  },
+  {
+    "code": "4752-1/00",
+    "description": "COMÉRCIO VAREJISTA ESPECIALIZADO DE EQUIPAMENTOS DE TELEFONIA E COMUNICAÇÃO",
+    "category": "Comércio"
+  },
+  {
+    "code": "4751-2/01",
+    "description": "COMÉRCIO VAREJISTA ESPECIALIZADO DE EQUIPAMENTOS E SUPRIMENTOS DE INFORMÁTICA",
+    "category": "Educação e Informática"
+  },
+  {
+    "code": "4789-0/07",
+    "description": "COMÉRCIO VAREJISTA DE EQUIPAMENTOS PARA ESCRITÓRIO",
+    "category": "Comércio"
+  },
+  {
+    "code": "4744-0/01",
+    "description": "COMÉRCIO VAREJISTA DE FERRAGENS E FERRAMENTAS",
+    "category": "Comércio"
+  },
+  {
+    "code": "4789-0/99",
+    "description": "COMÉRCIO VAREJISTA DE OUTROS PRODUTOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Comércio"
+  },
+  {
+    "code": "4756-3/00",
+    "description": "COMÉRCIO VAREJISTA ESPECIALIZADO DE INSTRUMENTOS MUSICAIS E ACESSÓRIOS",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4744-0/99",
+    "description": "COMÉRCIO VAREJISTA DE MATERIAIS DE CONSTRUÇÃO EM GERAL",
+    "category": "Construção Civil"
+  },
+  {
+    "code": "4713-0/02",
+    "description": "LOJAS DE VARIEDADES, EXCETO LOJAS DE DEPARTAMENTOS OU MAGAZINES",
+    "category": "Comércio"
+  },
+  {
+    "code": "4541-2/06",
+    "description": "COMÉRCIO A VAREJO DE PEÇAS E ACESSÓRIOS NOVOS PARA MOTOCICLETAS E MOTONETAS",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4530-7/03",
+    "description": "COMÉRCIO A VAREJO DE PEÇAS E ACESSÓRIOS NOVOS PARA VEÍCULOS AUTOMOTORES",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4757-1/00",
+    "description": "COMÉRCIO VAREJISTA ESPECIALIZADO DE PEÇAS E ACESSÓRIOS PARA APARELHOS ELETROELETRÔNICOS PARA USO DOMÉSTICO, EXCETO INFORMÁTICA E COMUNICAÇÃO",
+    "category": "Educação e Informática"
+  },
+  {
+    "code": "4541-2/07",
+    "description": "COMÉRCIO A VAREJO DE PEÇAS E ACESSÓRIOS USADOS PARA MOTOCICLETAS E MOTONETAS",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4530-7/04",
+    "description": "COMÉRCIO A VAREJO DE PEÇAS E ACESSÓRIOS USADOS PARA VEÍCULOS AUTOMOTORES",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4789-0/02",
+    "description": "COMÉRCIO VAREJISTA DE PLANTAS E FLORES NATURAIS",
+    "category": "Comércio"
+  },
+  {
+    "code": "4530-7/05",
+    "description": "COMÉRCIO A VAREJO DE PNEUMÁTICOS E CÂMARAS-DE-AR",
+    "category": "Comércio"
+  },
+  {
+    "code": "4772-5/00",
+    "description": "COMÉRCIO VAREJISTA DE COSMÉTICOS, PRODUTOS DE PERFUMARIA E DE HIGIENE PESSOAL",
+    "category": "Beleza e Estética"
+  },
+  {
+    "code": "4721-1/02",
+    "description": "PADARIA E CONFEITARIA COM PREDOMINÂNCIA DE REVENDA",
+    "category": "Alimentação"
+  },
+  {
+    "code": "4789-0/99",
+    "description": "COMÉRCIO VAREJISTA DE OUTROS PRODUTOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Comércio"
+  },
+  {
+    "code": "4759-8/99",
+    "description": "COMÉRCIO VAREJISTA DE OUTROS ARTIGOS DE USO PESSOAL E DOMÉSTICO NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Comércio"
+  },
+  {
+    "code": "4741-5/00",
+    "description": "COMÉRCIO VAREJISTA DE TINTAS E MATERIAIS PARA PINTURA",
+    "category": "Comércio"
+  },
+  {
+    "code": "4759-8/99",
+    "description": "COMÉRCIO VAREJISTA DE OUTROS ARTIGOS DE USO PESSOAL E DOMÉSTICO NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Comércio"
+  },
+  {
+    "code": "5620-1/04",
+    "description": "FORNECIMENTO DE ALIMENTOS PREPARADOS PREPONDERANTEMENTE PARA CONSUMO DOMICILIAR",
+    "category": "Alimentação"
+  },
+  {
+    "code": "0322-1/04CRIAÇÃO",
+    "description": "DE PEIXES ORNAMENTAIS EM ÁGUA DOCE N",
+    "category": "Alimentação"
+  },
+  {
+    "code": "0321-3/04",
+    "description": "CRIAÇÃO DE PEIXES ORNAMENTAIS EM ÁGUA SALGADA E SALOBRA",
+    "category": "Construção Civil"
+  },
+  {
+    "code": "3600-6/02",
+    "description": "DISTRIBUIÇÃO DE ÁGUA POR CAMINHÕES S",
+    "category": "Outros"
+  },
+  {
+    "code": "5819-1/00",
+    "description": "EDIÇÃO DE CADASTROS, LISTAS E DE OUTROS PRODUTOS GRÁFICOS",
+    "category": "Outros"
+  },
+  {
+    "code": "4321-5/00INSTALAÇÃO",
+    "description": "E MANUTENÇÃO ELÉTRICA S",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "1031-7/00FABRICANTE",
+    "description": "DE CONSERVAS DE FRUTAS N",
+    "category": "Outros"
+  },
+  {
+    "code": "1096-1/00FABRICAÇÃO",
+    "description": "DE ALIMENTOS E PRATOS PRONTOS N",
+    "category": "Alimentação"
+  },
+  {
+    "code": "1065-1/01FABRICAÇÃO",
+    "description": "DE AMIDOS E FÉCULAS DE VEGETAIS N",
+    "category": "Outros"
+  },
+  {
+    "code": "2532-2/01PRODUÇÃO",
+    "description": "DE ARTEFATOS ESTAMPADOS DE METAL S",
+    "category": "Outros"
+  },
+  {
+    "code": "1351-1/00",
+    "description": "FABRICAÇÃO DE ARTEFATOS TÊXTEIS PARA USO DOMÉSTICO",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "1093-7/02",
+    "description": "FABRICAÇÃO DE FRUTAS CRISTALIZADAS, BALAS E SEMELHANTES",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "3240-0/99",
+    "description": "FABRICAÇÃO DE OUTROS BRINQUEDOS E JOGOS RECREATIVOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "1539-4/00",
+    "description": "FABRICAÇÃO DE CALÇADOS DE MATERIAIS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "1032-5/99",
+    "description": "FABRICAÇÃO DE CONSERVAS DE LEGUMES E OUTROS VEGETAIS, EXCETO PALMITO",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "1732-0/00",
+    "description": "FABRICAÇÃO DE EMBALAGENS DE CARTOLINA E PAPEL-CARTÃO",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "2512-8/00",
+    "description": "FABRICAÇÃO DE ESQUADRIAS DE METAL S",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "1312-0/00",
+    "description": "PREPARAÇÃO E FIAÇÃO DE FIBRAS TÊXTEIS NATURAIS, EXCETO ALGODÃO",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "1220-4/99",
+    "description": "FABRICAÇÃO DE OUTROS PRODUTOS DO FUMO, EXCETO CIGARROS, CIGARRILHAS E CHARUTOS",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "3299-0/01FABRICAÇÃO",
+    "description": "DE GUARDA-CHUVAS E SIMILARES N",
+    "category": "Outros"
+  },
+  {
+    "code": "1742-7/99",
+    "description": "FABRICAÇÃO DE PRODUTOS DE PAPEL PARA USO DOMÉSTICO E HIGIÊNICO-SANITÁRIO NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "3299-0/03",
+    "description": "FABRICAÇÃO DE LETRAS, LETREIROS E PLACAS DE QUALQUER MATERIAL, EXCETO LUMINOSOS",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "3299-0/04FABRICAÇÃO",
+    "description": "DE PAINÉIS E LETREIROS LUMINOSOS N",
+    "category": "Outros"
+  },
+  {
+    "code": "1412-6/03",
+    "description": "FACÇÃO DE PEÇAS DO VESTUÁRIO, EXCETO ROUPAS ÍNTIMAS",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "1411-8/02",
+    "description": "FACÇÃO DE ROUPAS ÍNTIMAS S",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "1413-4/03FACÇÃO",
+    "description": "DE ROUPAS PROFISSIONAIS S",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "3292-2/02",
+    "description": "FABRICAÇÃO DE EQUIPAMENTOS E ACESSÓRIOS PARA SEGURANÇA PESSOAL E PROFISSIONAL",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "1061-9/02FABRICAÇÃO",
+    "description": "DE PRODUTOS DO ARROZ N",
+    "category": "Outros"
+  },
+  {
+    "code": "1122-4/03",
+    "description": "FABRICAÇÃO DE REFRESCOS, XAROPES E PÓS PARA REFRESCOS, EXCETO REFRESCOS DE FRUTAS",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "1033-3/01",
+    "description": "FABRICAÇÃO DE SUCOS CONCENTRADOS DE FRUTAS, HORTALIÇAS E LEGUMES",
+    "category": "Alimentação"
+  },
+  {
+    "code": "1033-3/02",
+    "description": "FABRICAÇÃO DE SUCOS DE FRUTAS, HORTALIÇAS E LEGUMES, EXCETO CONCENTRADOS",
+    "category": "Alimentação"
+  },
+  {
+    "code": "3299-0/06FABRICAÇÃO",
+    "description": "DE VELAS, INCLUSIVE DECORATIVAS N",
+    "category": "Outros"
+  },
+  {
+    "code": "5620-1/01",
+    "description": "FORNECIMENTO DE ALIMENTOS PREPARADOS PREPONDERANTEMENTE PARA EMPRESAS",
+    "category": "Alimentação"
+  },
+  {
+    "code": "4321-5/00INSTALAÇÃO",
+    "description": "E MANUTENÇÃO ELÉTRICA S",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "4329-1/02",
+    "description": "INSTALAÇÃO DE EQUIPAMENTOS PARA ORIENTAÇÃO À NAVEGAÇÃO MARÍTIMA, FLUVIAL E LACUSTRE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "4329-1/05",
+    "description": "TRATAMENTOS TÉRMICOS, ACÚSTICOS OU DE VIBRAÇÃO",
+    "category": "Outros"
+  },
+  {
+    "code": "3321-0/00",
+    "description": "INSTALAÇÃO DE MÁQUINAS E EQUIPAMENTOS INDUSTRIAIS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "4322-3/03",
+    "description": "INSTALAÇÕES DE SISTEMA DE PREVENÇÃO CONTRA INCÊNDIO",
+    "category": "Outros"
+  },
+  {
+    "code": "4520-0/07",
+    "description": "SERVIÇOS DE INSTALAÇÃO, MANUTENÇÃO E REPARAÇÃO DE ACESSÓRIOS PARA VEÍCULOS AUTOMOTORES",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "4329-1/03",
+    "description": "INSTALAÇÃO, MANUTENÇÃO E REPARAÇÃO DE ELEVADORES, ESCADAS E ESTEIRAS ROLANTES",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "8020-0/02",
+    "description": "OUTRAS ATIVIDADES DE SERVIÇOS DE SEGURANÇA S",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "4322-3/02",
+    "description": "INSTALAÇÃO E MANUTENÇÃO DE SISTEMAS CENTRAIS DE AR CONDICIONADO, DE VENTILAÇÃO E REFRIGERAÇÃO",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7729-2/01",
+    "description": "ALUGUEL DE APARELHOS DE JOGOS ELETRÔNICOS N",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7739-0/02",
+    "description": "ALUGUEL DE EQUIPAMENTOS CIENTÍFICOS, MÉDICOS E HOSPITALARES, SEM OPERADOR",
+    "category": "Saúde e Bem-Estar"
+  },
+  {
+    "code": "7721-7/00",
+    "description": "ALUGUEL DE EQUIPAMENTOS RECREATIVOS E ESPORTIVOS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7722-5/00",
+    "description": "ALUGUEL DE FITAS DE VÍDEO, DVDS E SIMILARES N",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7729-2/99",
+    "description": "ALUGUEL DE OUTROS OBJETOS PESSOAIS E DOMÉSTICOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7731-4/00",
+    "description": "ALUGUEL DE MÁQUINAS E EQUIPAMENTOS AGRÍCOLAS SEM OPERADOR",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7732-2/01",
+    "description": "ALUGUEL DE MÁQUINAS E EQUIPAMENTOS PARA CONSTRUÇÃO SEM OPERADOR, EXCETO ANDAIMES",
+    "category": "Construção Civil"
+  },
+  {
+    "code": "7733-1/00",
+    "description": "ALUGUEL DE MÁQUINAS E EQUIPAMENTOS PARA ESCRITÓRIO",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7721-7/00",
+    "description": "ALUGUEL DE EQUIPAMENTOS RECREATIVOS E ESPORTIVOS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7719-5/99",
+    "description": "LOCAÇÃO DE OUTROS MEIOS DE TRANSPORTE NÃO ESPECIFICADOS ANTERIORMENTE, SEM CONDUTOR",
+    "category": "Transporte"
+  },
+  {
+    "code": "7729-2/02",
+    "description": "ALUGUEL DE MÓVEIS, UTENSÍLIOS E APARELHOS DE USO DOMÉSTICO E PESSOAL; INSTRUMENTOS MUSICAIS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7723-3/00",
+    "description": "ALUGUEL DE OBJETOS DO VESTUÁRIO, JÓIAS E ACESSÓRIOS",
+    "category": "Moda e Vestuário"
+  },
+  {
+    "code": "7739-0/99",
+    "description": "ALUGUEL DE OUTRAS MÁQUINAS E EQUIPAMENTOS COMERCIAIS E INDUSTRIAIS NÃO ESPECIFICADOS ANTERIORMENTE, SEM OPERADOR",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "7739-0/03",
+    "description": "ALUGUEL DE PALCOS, COBERTURAS E OUTRAS ESTRUTURAS DE USO TEMPORÁRIO, EXCETO ANDAIMES",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "9609-2/99",
+    "description": "OUTRAS ATIVIDADES DE SERVIÇOS PESSOAIS NÃO ESPECIFICADAS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "4543-9/00",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MOTOCICLETAS E MOTONETAS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "4329-1/04",
+    "description": "MONTAGEM E INSTALAÇÃO DE SISTEMAS E EQUIPAMENTOS DE ILUMINAÇÃO E SINALIZAÇÃO EM VIAS PÚBLICAS, PORTOS E AEROPORTOS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "4929-9/03",
+    "description": "ORGANIZAÇÃO DE EXCURSÕES EM VEÍCULOS RODOVIÁRIOS PRÓPRIOS, MUNICIPAL",
+    "category": "Outros"
+  },
+  {
+    "code": "4399-1/05PERFURAÇÃO",
+    "description": "E CONSTRUÇÃO DE POÇOS DE ÁGUA S",
+    "category": "Construção Civil"
+  },
+  {
+    "code": "0161-0/03",
+    "description": "SERVIÇO DE PREPARAÇÃO DE TERRENO, CULTIVO E COLHEITA",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "0161-0/02SERVIÇO",
+    "description": "DE PODA DE ARVORES PARA LAVOURA S",
+    "category": "Outros"
+  },
+  {
+    "code": "0161-0/03",
+    "description": "SERVIÇO DE PREPARAÇÃO DE TERRENO, CULTIVO E COLHEITA",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "0161-0/03",
+    "description": "SERVIÇO DE PREPARAÇÃO DE TERRENO, CULTIVO E COLHEITA",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "0161-0/03",
+    "description": "SERVIÇO DE PREPARAÇÃO DE TERRENO, CULTIVO E COLHEITA",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "5590-6/01",
+    "description": "ALBERGUES, EXCETO ASSISTENCIAIS S",
+    "category": "Outros"
+  },
+  {
+    "code": "5611-2/05",
+    "description": "BARES E OUTROS ESTABELECIMENTOS ESPECIALIZADOS EM SERVIR BEBIDAS, COM ENTRETENIMENTO",
+    "category": "Alimentação"
+  },
+  {
+    "code": "5611-2/04",
+    "description": "BARES E OUTROS ESTABELECIMENTOS ESPECIALIZADOS EM SERVIR BEBIDAS, SEM ENTRETENIMENTO",
+    "category": "Alimentação"
+  },
+  {
+    "code": "7319-0/99",
+    "description": "OUTRAS ATIVIDADES DE PUBLICIDADE NÃO ESPECIFICADAS ANTERIORMENTE",
+    "category": "Outros"
+  },
+  {
+    "code": "8230-0/02",
+    "description": "CASAS DE FESTAS E EVENTOS S",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "5223-1/00ESTACIONAMENTO",
+    "description": "DE VEÍCULOS S",
+    "category": "Outros"
+  },
+  {
+    "code": "8299-7/07",
+    "description": "SALAS DE ACESSO À INTERNET S",
+    "category": "Educação e Informática"
+  },
+  {
+    "code": "9329-8/03",
+    "description": "EXPLORAÇÃO DE JOGOS DE SINUCA, BILHAR E SIMILARES",
+    "category": "Outros"
+  },
+  {
+    "code": "4751-2/02",
+    "description": "RECARGA DE CARTUCHOS PARA EQUIPAMENTOS DE INFORMÁTICA",
+    "category": "Educação e Informática"
+  },
+  {
+    "code": "3839-4/99",
+    "description": "RECUPERAÇÃO DE MATERIAIS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Outros"
+  },
+  {
+    "code": "3831-9/99",
+    "description": "RECUPERAÇÃO DE MATERIAIS METÁLICOS, EXCETO ALUMÍNIO",
+    "category": "Outros"
+  },
+  {
+    "code": "3313-9/99",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MÁQUINAS, APARELHOS E MATERIAIS ELÉTRICOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "9529-1/99",
+    "description": "REPARAÇÃO E MANUTENÇÃO DE OUTROS OBJETOS E EQUIPAMENTOS PESSOAIS E DOMÉSTICOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/10",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MÁQUINAS E EQUIPAMENTOS PARA USO GERAL NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3313-9/02",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE BATERIAS E ACUMULADORES ELÉTRICOS, EXCETO PARA VEÍCULOS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3319-8/00",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE EQUIPAMENTOS E PRODUTOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3317-1/02",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE EMBARCAÇÕES PARA ESPORTE E LAZER",
+    "category": "Alimentação"
+  },
+  {
+    "code": "9529-1/99",
+    "description": "REPARAÇÃO E MANUTENÇÃO DE OUTROS OBJETOS E EQUIPAMENTOS PESSOAIS E DOMÉSTICOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/02",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE EQUIPAMENTOS HIDRÁULICOS E PNEUMÁTICOS, EXCETO VÁLVULAS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3319-8/00",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE EQUIPAMENTOS E PRODUTOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3313-9/01",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE GERADORES, TRANSFORMADORES E MOTORES ELÉTRICOS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "9529-1/99",
+    "description": "REPARAÇÃO E MANUTENÇÃO DE OUTROS OBJETOS E EQUIPAMENTOS PESSOAIS E DOMÉSTICOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/09",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MÁQUINAS DE ESCREVER, CALCULAR E DE OUTROS EQUIPAMENTOS NÃO ELETRÔNICOS PARA ESCRITÓRIO",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/07",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MÁQUINAS E APARELHOS DE REFRIGERAÇÃO E VENTILAÇÃO PARA USO INDUSTRIAL E COMERCIAL",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/99",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE OUTRAS MÁQUINAS E EQUIPAMENTOS PARA USOS INDUSTRIAIS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/20",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MÁQUINAS E EQUIPAMENTOS PARA A INDÚSTRIA TÊXTIL, DO VESTUÁRIO, DO COURO E CALÇADOS",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "3314-7/11",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MÁQUINAS E EQUIPAMENTOS PARA AGRICULTURA E PECUÁRIA",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/19MANUTENÇÃO",
+    "description": "E REPARAÇÃO DE MÁQUINAS E",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/99",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE OUTRAS MÁQUINAS E EQUIPAMENTOS PARA USOS INDUSTRIAIS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3314-7/06",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE MÁQUINAS, E EQUIPAMENTOS PARA INSTALAÇÕES TÉRMICAS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3311-2/00",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE TANQUES, RESERVATÓRIOS METÁLICOS E CALDEIRAS, EXCETO PARA VEÍCULOS",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3319-8/00",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE EQUIPAMENTOS E PRODUTOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3319-8/00",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE EQUIPAMENTOS E PRODUTOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "3319-8/00",
+    "description": "MANUTENÇÃO E REPARAÇÃO DE EQUIPAMENTOS E PRODUTOS NÃO ESPECIFICADOS ANTERIORMENTE",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "2950-6/00",
+    "description": "RECONDICIONAMENTO E RECUPERAÇÃO DE MOTORES PARA VEÍCULOS AUTOMOTORES",
+    "category": "Outros"
+  },
+  {
+    "code": "2542-0/00",
+    "description": "FABRICAÇÃO DE ARTIGOS DE SERRALHERIA, EXCETO ESQUADRIAS",
+    "category": "Indústria e Artesanato"
+  },
+  {
+    "code": "9001-9/06ATIVIDADES",
+    "description": "DE SONORIZAÇÃO E DE ILUMINAÇÃO S",
+    "category": "Outros"
+  },
+  {
+    "code": "9511-8/00",
+    "description": "REPARAÇÃO E MANUTENÇÃO DE COMPUTADORES E DE EQUIPAMENTOS PERIFÉRICOS",
+    "category": "Educação e Informática"
+  },
+  {
+    "code": "9521-5/00",
+    "description": "REPARAÇÃO E MANUTENÇÃO DE EQUIPAMENTOS ELETROELETRÔNICOS DE USO PESSOAL E DOMÉSTICO",
+    "category": "Serviços Gerais"
+  },
+  {
+    "code": "5099-8/01",
+    "description": "TRANSPORTE AQUAVIÁRIO PARA PASSEIOS TURÍSTICOS",
+    "category": "Transporte"
+  },
+  {
+    "code": "4929-9/02",
+    "description": "TRANSPORTE RODOVIÁRIO COLETIVO DE PASSAGEIROS, SOB REGIME DE FRETAMENTO, INTERMUNICIPAL, INTERESTADUAL E INTERNACIONAL",
+    "category": "Transporte"
+  },
+  {
+    "code": "5091-2/02",
+    "description": "TRANSPORTE POR NAVEGAÇÃO DE TRAVESSIA, INTERMUNICIPAL, INTERESTADUAL E INTERNACIONAL",
+    "category": "Transporte"
+  },
+  {
+    "code": "4930-2/01",
+    "description": "TRANSPORTE RODOVIÁRIO DE CARGA, EXCETO PRODUTOS PERIGOSOS E MUDANÇAS, MUNICIPAL",
+    "category": "Transporte"
+  },
+  {
+    "code": "4929-9/01",
+    "description": "TRANSPORTE RODOVIÁRIO COLETIVO DE PASSAGEIROS SOB REGIME DE FRETAMENTO, MUNICIPAL",
+    "category": "Transporte"
+  },
+  {
+    "code": "5091-2/01",
+    "description": "TRANSPORTE POR NAVEGAÇÃO DE TRAVESSIA, MUNICIPAL",
+    "category": "Transporte"
+  },
+  {
+    "code": "5021-1/01",
+    "description": "TRANSPORTE POR NAVEGAÇÃO INTERIOR DE CARGA, MUNICIPAL, EXCETO TRAVESSIA",
+    "category": "Transporte"
+  },
+  {
+    "code": "5612-1/00SERVIÇOS",
+    "description": "AMBULANTES DE ALIMENTAÇÃO N",
+    "category": "Alimentação"
+  },
+  {
+    "code": "4724-5/00",
+    "description": "COMÉRCIO VAREJISTA DE HORTIFRUTIGRANJEIROS N",
+    "category": "Alimentação"
+  },
+  {
+    "code": "4930-2/02",
+    "description": "TRANSPORTE RODOVIÁRIO DE CARGA, EXCETO PRODUTOS PERIGOSOS E MUDANÇAS, INTERMUNICIPAL, INTERESTADUAL E INTERNACIONAL",
+    "category": "Transporte"
+  },
+  {
+    "code": "4930-2/03",
+    "description": "TRANSPORTE RODOVIÁRIO DE PRODUTOS PERIGOSOS",
+    "category": "Transporte"
+  }
+]
