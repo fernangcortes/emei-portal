@@ -21,6 +21,35 @@ const defaultData: CurriculoData = {
     servicos: [], experiencias: [], formacoes: [], habilidades: [], redesSociais: [],
 };
 
+const Field = ({ label, value, onChange, placeholder, multiline = false, action }: {
+    label: string; value: string; onChange: (v: string) => void; placeholder?: string; multiline?: boolean; action?: ReactNode;
+}) => (
+    <div>
+        <div className="flex items-center justify-between mb-1">
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{label}</label>
+            {action}
+        </div>
+        {multiline ? (
+            <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={3}
+                className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none" />
+        ) : (
+            <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
+                className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+        )}
+    </div>
+);
+
+const ListInput = ({ value, onChange, placeholder, className }: {
+    value: string; onChange: (v: string) => void; placeholder?: string; className?: string;
+}) => (
+    <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className={`rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 ${className}`}
+    />
+);
+
 export function Curriculo() {
     const empresa = useEmpresaStore((s) => s.empresa);
     const geminiApiKey = useConfigStore((s) => s.geminiApiKey);
@@ -165,25 +194,7 @@ ${data.redesSociais.length > 0 ? `<div class="section"><h2>Redes Sociais</h2><di
         const html = generateHTML();
         const w = window.open("", "_blank");
         if (w) { w.document.write(html); w.document.close(); setTimeout(() => w.print(), 500); }
-}
-
-const Field = ({ label, value, onChange, placeholder, multiline = false, action }: {
-    label: string; value: string; onChange: (v: string) => void; placeholder?: string; multiline?: boolean; action?: ReactNode;
-}) => (
-    <div>
-        <div className="flex items-center justify-between mb-1">
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{label}</label>
-            {action}
-        </div>
-        {multiline ? (
-            <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={3}
-                className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none" />
-        ) : (
-            <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
-                className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-        )}
-    </div>
-);
+    };
 
     if (preview) {
         return (
@@ -248,10 +259,10 @@ const Field = ({ label, value, onChange, placeholder, multiline = false, action 
                 </div>
                 {data.servicos.map((s, i) => (
                     <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl border border-dashed border-border relative">
-                        <input value={s.titulo} onChange={(e) => updateServico(i, "titulo", e.target.value)} placeholder="Nome do serviço" className="rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-                        <input value={s.descricao} onChange={(e) => updateServico(i, "descricao", e.target.value)} placeholder="Descrição breve" className="rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                        <ListInput value={s.titulo} onChange={(v) => updateServico(i, "titulo", v)} placeholder="Nome do serviço" />
+                        <ListInput value={s.descricao} onChange={(v) => updateServico(i, "descricao", v)} placeholder="Descrição breve" />
                         <div className="flex gap-2">
-                            <input value={s.preco} onChange={(e) => updateServico(i, "preco", e.target.value)} placeholder="R$ ou faixa" className="flex-1 rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                            <ListInput value={s.preco} onChange={(v) => updateServico(i, "preco", v)} placeholder="R$ ou faixa" className="flex-1" />
                             <button onClick={() => setData({ ...data, servicos: data.servicos.filter((_, j) => j !== i) })} className="text-muted-foreground hover:text-red-500 p-2">✕</button>
                         </div>
                     </div>
@@ -267,14 +278,14 @@ const Field = ({ label, value, onChange, placeholder, multiline = false, action 
                 {data.experiencias.map((e, i) => (
                     <div key={i} className="p-3 rounded-xl border border-dashed border-border space-y-2 relative">
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <input value={e.cargo} onChange={(ev) => updateExp(i, "cargo", ev.target.value)} placeholder="Cargo/Função" className="rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-                            <input value={e.local} onChange={(ev) => updateExp(i, "local", ev.target.value)} placeholder="Empresa/Local" className="rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                            <ListInput value={e.cargo} onChange={(v) => updateExp(i, "cargo", v)} placeholder="Cargo/Função" />
+                            <ListInput value={e.local} onChange={(v) => updateExp(i, "local", v)} placeholder="Empresa/Local" />
                             <div className="flex gap-2">
-                                <input value={e.periodo} onChange={(ev) => updateExp(i, "periodo", ev.target.value)} placeholder="2020 - 2023" className="flex-1 rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                                <ListInput value={e.periodo} onChange={(v) => updateExp(i, "periodo", v)} placeholder="2020 - 2023" className="flex-1" />
                                 <button onClick={() => setData({ ...data, experiencias: data.experiencias.filter((_, j) => j !== i) })} className="text-muted-foreground hover:text-red-500 p-2">✕</button>
                             </div>
                         </div>
-                        <input value={e.descricao} onChange={(ev) => updateExp(i, "descricao", ev.target.value)} placeholder="Breve descrição das atividades" className="w-full rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                        <ListInput value={e.descricao} onChange={(v) => updateExp(i, "descricao", v)} placeholder="Breve descrição das atividades" className="w-full" />
                     </div>
                 ))}
             </div>
@@ -287,10 +298,10 @@ const Field = ({ label, value, onChange, placeholder, multiline = false, action 
                 </div>
                 {data.formacoes.map((f, i) => (
                     <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-3 rounded-xl border border-dashed border-border">
-                        <input value={f.curso} onChange={(e) => updateFormacao(i, "curso", e.target.value)} placeholder="Curso" className="rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-                        <input value={f.instituicao} onChange={(e) => updateFormacao(i, "instituicao", e.target.value)} placeholder="Instituição" className="rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                        <ListInput value={f.curso} onChange={(v) => updateFormacao(i, "curso", v)} placeholder="Curso" />
+                        <ListInput value={f.instituicao} onChange={(v) => updateFormacao(i, "instituicao", v)} placeholder="Instituição" />
                         <div className="flex gap-2">
-                            <input value={f.ano} onChange={(e) => updateFormacao(i, "ano", e.target.value)} placeholder="Ano" className="flex-1 rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                            <ListInput value={f.ano} onChange={(v) => updateFormacao(i, "ano", v)} placeholder="Ano" className="flex-1" />
                             <button onClick={() => setData({ ...data, formacoes: data.formacoes.filter((_, j) => j !== i) })} className="text-muted-foreground hover:text-red-500 p-2">✕</button>
                         </div>
                     </div>
@@ -301,8 +312,7 @@ const Field = ({ label, value, onChange, placeholder, multiline = false, action 
             <div className="rounded-2xl border border-border bg-card p-5 space-y-3">
                 <h3 className="text-sm font-bold">⚡ Habilidades</h3>
                 <div className="flex gap-2">
-                    <input value={newSkill} onChange={(e) => setNewSkill(e.target.value)} placeholder="Nova habilidade" onKeyDown={(e) => e.key === "Enter" && addSkill()}
-                        className="flex-1 rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                    <ListInput value={newSkill} onChange={setNewSkill} placeholder="Nova habilidade" className="flex-1" />
                     <button onClick={addSkill} className="rounded-xl bg-primary px-3 py-2 text-sm font-bold text-primary-foreground">+</button>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -323,9 +333,9 @@ const Field = ({ label, value, onChange, placeholder, multiline = false, action 
                 </div>
                 {data.redesSociais.map((r, i) => (
                     <div key={i} className="grid grid-cols-2 gap-2">
-                        <input value={r.nome} onChange={(e) => updateRede(i, "nome", e.target.value)} placeholder="Nome (ex: Instagram)" className="rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                        <ListInput value={r.nome} onChange={(v) => updateRede(i, "nome", v)} placeholder="Nome (ex: Instagram)" />
                         <div className="flex gap-2">
-                            <input value={r.url} onChange={(e) => updateRede(i, "url", e.target.value)} placeholder="URL" className="flex-1 rounded-xl border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                            <ListInput value={r.url} onChange={(v) => updateRede(i, "url", v)} placeholder="URL" className="flex-1" />
                             <button onClick={() => setData({ ...data, redesSociais: data.redesSociais.filter((_, j) => j !== i) })} className="text-muted-foreground hover:text-red-500 p-2">✕</button>
                         </div>
                     </div>
