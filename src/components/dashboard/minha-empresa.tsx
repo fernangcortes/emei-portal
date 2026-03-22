@@ -78,6 +78,8 @@ Retorne ESTRITAMENTE um objeto JSON válido (sem blocos markdown) no seguinte fo
   "razaoSocial": "",
   "dataAbertura": "YYYY-MM-DD",
   "capitalSocial": "",
+  "cnaePrincipal": "código - descrição",
+  "cnaesSecundarios": ["código - descrição", "código - descrição"],
   "endereco": { "cep": "", "rua": "", "numero": "", "bairro": "", "cidade": "", "estado": "" }
 }`;
 
@@ -89,6 +91,10 @@ Retorne ESTRITAMENTE um objeto JSON válido (sem blocos markdown) no seguinte fo
                     if (parsed.razaoSocial) updateEmpresa({ razaoSocial: parsed.razaoSocial });
                     if (parsed.dataAbertura) updateEmpresa({ dataAbertura: parsed.dataAbertura });
                     if (parsed.capitalSocial) updateEmpresa({ capitalSocial: parsed.capitalSocial });
+                    if (parsed.cnaePrincipal) updateEmpresa({ cnaePrincipal: parsed.cnaePrincipal });
+                    if (parsed.cnaesSecundarios && Array.isArray(parsed.cnaesSecundarios)) {
+                        updateEmpresa({ cnaesSecundarios: parsed.cnaesSecundarios });
+                    }
 
                     if (parsed.endereco) {
                         updateEndereco({
