@@ -2,7 +2,8 @@
 
 import { useEmpresaStore } from "@/store/empresa-store";
 import { useConfigStore } from "@/store/config-store";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { generateFromDocument } from "@/lib/gemini";
 
 const estados = [
     "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS",
@@ -32,6 +33,8 @@ export function MinhaEmpresa() {
     const { geminiApiKey, setGeminiApiKey } = useConfigStore();
     const [mounted, setMounted] = useState(false);
     const [saved, setSaved] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [isImporting, setIsImporting] = useState(false);
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { setMounted(true); }, []);
@@ -51,6 +54,71 @@ export function MinhaEmpresa() {
         setTimeout(() => setSaved(false), 2000);
     };
 
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (!geminiApiKey) {
+            alert("Configure a Chave de API do Gemini no final desta página primeiro.");
+            if (fileInputRef.current) fileInputRef.current.value = "";
+            return;
+        }
+
+        setIsImporting(true);
+        try {
+            const reader = new FileReader();
+            reader.onload = async () => {
+                const base64String = (reader.result as string).split(",")[1];
+                const mimeType = file.type;
+
+                const prompt = `Extraia os dados principais deste documento (como um Certificado de Condição de MEI - CCMEI). 
+Retorne ESTRITAMENTE um objeto JSON válido (sem blocos markdown) no seguinte formato (deixe em branco se não achar):
+{
+  "cnpj": "",
+  "razaoSocial": "",
+  "dataAbertura": "YYYY-MM-DD",
+  "capitalSocial": "",
+  "endereco": { "cep": "", "rua": "", "numero": "", "bairro": "", "cidade": "", "estado": "" }
+}`;
+
+                try {
+                    const jsonStr = await generateFromDocument(prompt, base64String, mimeType, geminiApiKey);
+                    const parsed = JSON.parse(jsonStr);
+                    
+                    if (parsed.cnpj) updateEmpresa({ cnpj: parsed.cnpj });
+                    if (parsed.razaoSocial) updateEmpresa({ razaoSocial: parsed.razaoSocial });
+                    if (parsed.dataAbertura) updateEmpresa({ dataAbertura: parsed.dataAbertura });
+                    if (parsed.capitalSocial) updateEmpresa({ capitalSocial: parsed.capitalSocial });
+
+                    if (parsed.endereco) {
+                        updateEndereco({
+                            cep: parsed.endereco.cep || "",
+                            rua: parsed.endereco.rua || "",
+                            numero: parsed.endereco.numero || "",
+                            bairro: parsed.endereco.bairro || "",
+                            cidade: parsed.endereco.cidade || "",
+                            estado: parsed.endereco.estado || ""
+                        });
+                    }
+
+                    alert("Dados importados com sucesso!");
+                } catch (error: any) {
+                    alert("Erro ao extrair dados: " + error.message);
+                } finally {
+                    setIsImporting(false);
+                    if (fileInputRef.current) fileInputRef.current.value = "";
+                }
+            };
+            reader.onerror = () => {
+                alert("Erro ao ler arquivo.");
+                setIsImporting(false);
+            };
+            reader.readAsDataURL(file);
+        } catch (error) {
+            setIsImporting(false);
+        }
+    };
+
     return (
         <div className="space-y-6">
             {/* Header */}
@@ -61,15 +129,26 @@ export function MinhaEmpresa() {
                         Seus dados cadastrais como MEI. Salvos automaticamente no navegador.
                     </p>
                 </div>
-                <button
-                    onClick={handleSave}
-                    className={`rounded-xl px-4 py-2 text-sm font-bold transition-all ${saved
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/40"
-                        }`}
-                >
-                    {saved ? "✓ Salvo!" : "💾 Salvar"}
-                </button>
+                <div className="flex gap-2">
+                    <input type="file" ref={fileInputRef} className="hidden" accept="application/pdf,image/*" onChange={handleFileUpload} />
+                    <button
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={isImporting}
+                        className="rounded-xl bg-blue-100 text-blue-800 border border-blue-200 px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold transition-all hover:bg-blue-200 disabled:opacity-50 flex items-center gap-1.5"
+                        title="Importar dados do CCMEI via IA"
+                    >
+                        {isImporting ? "⏳ Lendo..." : "✨ Importar CCMEI (PDF)"}
+                    </button>
+                    <button
+                        onClick={handleSave}
+                        className={`rounded-xl px-4 py-2 text-sm font-bold transition-all ${saved
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/40"
+                            }`}
+                    >
+                        {saved ? "✓ Salvo!" : "💾 Salvar"}
+                    </button>
+                </div>
             </div>
 
             {/* Dados Gerais */}

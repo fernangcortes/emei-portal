@@ -3,8 +3,8 @@
 import { useEmpresaStore } from "@/store/empresa-store";
 import { useConfigStore } from "@/store/config-store";
 import { useClientesStore, type Cliente } from "@/store/clientes-store";
-import { generateWithGemini } from "@/lib/gemini";
-import { useState, useEffect } from "react";
+import { generateFromDocument, generateWithGemini } from "@/lib/gemini";
+import { useState, useEffect, useRef } from "react";
 
 interface OrcamentoItem {
     descricao: string;
@@ -42,6 +42,9 @@ export function Documentos() {
     const [activeForm, setActiveForm] = useState<"nf" | "recibo" | "orcamento" | null>(null);
     const [previewDoc, setPreviewDoc] = useState<OrcamentoData | null>(null);
     const [selectedClienteId, setSelectedClienteId] = useState("");
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [isImporting, setIsImporting] = useState(false);
+    
     const [form, setForm] = useState<Omit<OrcamentoData, "id">>({
         tipo: "orcamento", numero: "", clienteId: "", clienteNome: "", clienteDoc: "", clienteEmail: "", clienteEndereco: "",
         titulo: "", itens: [{ descricao: "", quantidade: 1, valorUnitario: 0 }], observacoes: "", validade: "30 dias", formaPagamento: "PIX", data: new Date().toISOString().slice(0, 10),
@@ -96,6 +99,78 @@ Requisitos:
             const obs = await generateWithGemini(prompt, geminiApiKey);
             setForm({ ...form, observacoes: obs });
         } catch (e: any) { alert(e.message); } finally { setIsGeneratingObs(false); }
+    };
+
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (!geminiApiKey) {
+            alert("Configure a Chave de API do Gemini na aba Minha Empresa.");
+            if (fileInputRef.current) fileInputRef.current.value = "";
+            return;
+        }
+
+        setIsImporting(true);
+        try {
+            const reader = new FileReader();
+            reader.onload = async () => {
+                const base64String = (reader.result as string).split(",")[1];
+                const mimeType = file.type;
+
+                const prompt = `Analise este documento (pode ser nota fiscal, print, foto, ou texto com dados de cliente).
+Extraia os dados do cliente e os itens/serviços detalhados.
+Retorne APENAS um objeto JSON rigorosamente neste formato:
+{
+  "clienteNome": "",
+  "clienteDoc": "",
+  "clienteEmail": "",
+  "clienteEndereco": "",
+  "itens": [
+    {
+      "descricao": "",
+      "quantidade": 1,
+      "valorUnitario": 0.00
+    }
+  ],
+  "observacoes": "",
+  "formaPagamento": "",
+  "titulo": ""
+}
+Se não encontrar um campo, deixe em branco. Para itens, tente extrair a lista com suas devidas quantidades e valores monetários numéricos exatos.`;
+
+                try {
+                    const jsonStr = await generateFromDocument(prompt, base64String, mimeType, geminiApiKey);
+                    const parsed = JSON.parse(jsonStr);
+
+                    setForm({
+                        ...form,
+                        clienteNome: parsed.clienteNome || form.clienteNome,
+                        clienteDoc: parsed.clienteDoc || form.clienteDoc,
+                        clienteEmail: parsed.clienteEmail || form.clienteEmail,
+                        clienteEndereco: parsed.clienteEndereco || form.clienteEndereco,
+                        titulo: parsed.titulo || form.titulo,
+                        observacoes: parsed.observacoes || form.observacoes,
+                        formaPagamento: parsed.formaPagamento || form.formaPagamento,
+                        itens: parsed.itens && parsed.itens.length > 0 ? parsed.itens : form.itens
+                    });
+
+                    alert("Dados importados com sucesso!");
+                } catch (error: any) {
+                    alert("Erro ao extrair dados do documento: " + error.message);
+                } finally {
+                    setIsImporting(false);
+                    if (fileInputRef.current) fileInputRef.current.value = "";
+                }
+            };
+            reader.onerror = () => {
+                alert("Erro ao ler arquivo.");
+                setIsImporting(false);
+            };
+            reader.readAsDataURL(file);
+        } catch (error) {
+            setIsImporting(false);
+        }
     };
 
     const handleCreate = () => {
@@ -280,7 +355,18 @@ ${doc.observacoes ? `<h4 style="margin-top:12px">Observações</h4><p>${doc.obse
                     {activeForm && (
                         <div className="rounded-2xl border border-primary/20 bg-card p-5 space-y-5">
                             <div className="flex items-center justify-between">
-                                <h3 className="text-sm font-bold">Novo {tipoLabels[activeForm]}</h3>
+                                <div className="flex items-center gap-3">
+                                    <h3 className="text-sm font-bold">Novo {tipoLabels[activeForm]}</h3>
+                                    <input type="file" ref={fileInputRef} className="hidden" accept="application/pdf,image/*,text/plain" onChange={handleFileUpload} />
+                                    <button 
+                                        onClick={() => fileInputRef.current?.click()}
+                                        disabled={isImporting}
+                                        className="text-[10px] font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded-full hover:bg-blue-200 disabled:opacity-50 transition-all flex items-center gap-1"
+                                        title="Use IA para preencher dados via NF, foto ou texto"
+                                    >
+                                        {isImporting ? "⏳ Lendo..." : "✨ Preencher com Imagem/PDF"}
+                                    </button>
+                                </div>
                                 <button onClick={() => setActiveForm(null)} className="text-muted-foreground hover:text-foreground text-xs font-bold">✕ Fechar</button>
                             </div>
 
