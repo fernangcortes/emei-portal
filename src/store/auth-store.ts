@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { getFirebaseDb } from "@/lib/firebase";
 import { useEmpresaStore } from "./empresa-store";
 import { useClientesStore } from "./clientes-store";
 import { useFinanceiroStore } from "./financeiro-store";
@@ -35,7 +35,7 @@ export const useAuthStore = create<AuthState>()(
                 const { user } = get();
                 if (!user) return;
 
-                const userRef = doc(db, "users", user.uid);
+                const userRef = doc(getFirebaseDb(), "users", user.uid);
                 
                 try {
                     const snap = await getDoc(userRef);
@@ -78,7 +78,7 @@ function debouncedSync(payload: Record<string, unknown>) {
     if (!user) return;
     if (syncTimeout) clearTimeout(syncTimeout);
     syncTimeout = setTimeout(() => {
-        setDoc(doc(db, "users", user.uid), payload, { merge: true }).catch(console.error);
+        setDoc(doc(getFirebaseDb(), "users", user.uid), payload, { merge: true }).catch(console.error);
     }, 1500);
 }
 

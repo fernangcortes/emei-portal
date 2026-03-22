@@ -60,11 +60,5 @@ export const logoutGoogle = async () => {
     }
 };
 
-// Backward compatibility aliases
-export const auth = new Proxy({} as Auth, {
-    get: (_, prop) => (getFirebaseAuth() as any)[prop],
-});
-
-export const db = new Proxy({} as Firestore, {
-    get: (_, prop) => (getFirebaseDb() as any)[prop],
-});
+// Re-export getter functions as the primary API
+export { getFirebaseAuth as auth, getFirebaseDb as db };
