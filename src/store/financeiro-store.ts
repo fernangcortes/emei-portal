@@ -120,7 +120,7 @@ export const useFinanceiroStore = create<FinanceiroState>()(
                             tipo: "despesa",
                             valor: dasValue,
                             descricao: `Imposto DAS MEI - ${mes}`,
-                            categoria: "Impostos",
+                            categoria: "Imposto/DAS",
                             data: currentDate,
                             pago: true,
                             formaPagamento: "boleto",

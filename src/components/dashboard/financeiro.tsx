@@ -74,6 +74,46 @@ export function Financeiro() {
     const saldoMes = receitaMes - despesaMes;
     const receitaAnual = yearTx.filter((t) => t.tipo === "receita").reduce((s, t) => s + t.valor, 0);
 
+    const dasValue = empresa.tipoAtividade === "comercio" ? 75.90 : empresa.tipoAtividade === "servico" ? 79.90 : 80.90;
+
+    const blendedContas = useMemo(() => {
+        const pendingDasList: typeof contas = [];
+        const todayD = new Date();
+        todayD.setHours(0,0,0,0);
+        for (let idx = 0; idx < 12; idx++) {
+            const mesKey = `${currentYear}-${String(idx + 1).padStart(2, "0")}`;
+            const pago = store.dasHistorico.find(d => d.mes === mesKey)?.pago ?? false;
+            
+            let isNaoSeAplica = false;
+            if (empresa.dataAbertura) {
+                const [aAno, aMes] = empresa.dataAbertura.split("-").map(Number);
+                if (currentYear < aAno || (currentYear === aAno && idx < aMes - 1)) {
+                    isNaoSeAplica = true;
+                }
+            }
+            if (!pago && !isNaoSeAplica && todayD >= new Date(currentYear, idx, 1)) {
+                const d = new Date(currentYear, idx + 1, 20);
+                pendingDasList.push({
+                    id: `das-${mesKey}`,
+                    tipo: "pagar",
+                    descricao: `DAS Mensal Simplificado - ${mesesLabels[idx]}/${currentYear}`,
+                    valor: dasValue,
+                    vencimento: d.toISOString().slice(0, 10),
+                    pago: false
+                });
+            }
+        }
+        return [...contas, ...pendingDasList];
+    }, [contas, store.dasHistorico, currentYear, empresa.dataAbertura, dasValue]);
+
+    const handleToggleContaPaga = (id: string) => {
+        if (id.startsWith("das-")) {
+            store.toggleDas(id.replace("das-", ""), dasValue);
+        } else {
+            toggleContaPaga(id);
+        }
+    };
+
     // Monthly data for chart
     const monthlyData = useMemo(() =>
         mesesLabels.map((_, idx) => {
@@ -116,10 +156,10 @@ export function Financeiro() {
         if (despesaMes > 0 && receitaMes / despesaMes > 2) score += 10;
         if (receitaAnual > 0 && receitaAnual < LIMITE_ANUAL * 0.8) score += 10;
         if (receitaAnual >= LIMITE_ANUAL * 0.9) score -= 15;
-        const contasAtrasadas = contas.filter((c) => !c.pago && c.vencimento && c.vencimento < now.toISOString().slice(0, 10)).length;
+        const contasAtrasadas = blendedContas.filter((c) => !c.pago && c.vencimento && c.vencimento < now.toISOString().slice(0, 10)).length;
         score -= contasAtrasadas * 5;
         return Math.max(0, Math.min(100, score));
-    }, [receitaMes, despesaMes, saldoMes, receitaAnual, contas, now]);
+    }, [receitaMes, despesaMes, saldoMes, receitaAnual, blendedContas, now]);
 
     if (!mounted) return <div className="h-96 animate-pulse rounded-2xl bg-muted" />;
 
@@ -131,7 +171,6 @@ export function Financeiro() {
     };
 
     const filtered = filtro === "todos" ? monthTx : monthTx.filter((t) => t.tipo === filtro);
-    const dasValue = empresa.tipoAtividade === "comercio" ? 75.90 : empresa.tipoAtividade === "servico" ? 79.90 : 80.90;
     const pctFat = Math.min((receitaAnual / LIMITE_ANUAL) * 100, 100);
 
     // —— EXPORT FUNCTIONS ——
@@ -379,13 +418,11 @@ export function Financeiro() {
                         <h3 className="text-sm font-bold mb-4">📊 Demonstração de Resultados — {mesesLabels[selectedMonth.month]} {selectedMonth.year}</h3>
                         {[
                             { label: "(+) Receita Bruta de Vendas/Serviços", value: receitaMes, bold: true, color: "text-primary" },
-                            { label: "(-) DAS Simples Nacional", value: dasValue, bold: false, color: "text-red-500" },
-                            { label: "(=) Receita Líquida", value: receitaMes - dasValue, bold: true, color: "" },
                             { label: "", value: 0, bold: false, color: "", separator: true },
                             ...categoryBreakdown.map((c) => ({ label: `(-) ${c.cat}`, value: c.valor, bold: false, color: "text-red-500" })),
                             { label: "(=) Total de Despesas Operacionais", value: despesaMes, bold: true, color: "text-red-600" },
                             { label: "", value: 0, bold: false, color: "", separator: true },
-                            { label: "(=) RESULTADO DO PERÍODO", value: saldoMes - dasValue, bold: true, color: saldoMes - dasValue >= 0 ? "text-emerald-600" : "text-red-600" },
+                            { label: "(=) RESULTADO DO PERÍODO", value: saldoMes, bold: true, color: saldoMes >= 0 ? "text-emerald-600" : "text-red-600" },
                         ].map((row, i) =>
                             'separator' in row && row.separator
                                 ? <div key={i} className="border-b border-dashed border-border my-2" />
@@ -406,7 +443,7 @@ export function Financeiro() {
                         <div className="grid grid-cols-3 gap-3">
                             {[
                                 { label: "Margem Bruta", value: receitaMes > 0 ? ((receitaMes - despesaMes) / receitaMes * 100) : 0 },
-                                { label: "Margem Líquida", value: receitaMes > 0 ? ((receitaMes - despesaMes - dasValue) / receitaMes * 100) : 0 },
+                                { label: "Margem Líquida", value: receitaMes > 0 ? ((saldoMes) / receitaMes * 100) : 0 },
                                 { label: "Custo/Receita", value: receitaMes > 0 ? (despesaMes / receitaMes * 100) : 0 },
                             ].map((ind) => (
                                 <div key={ind.label} className="rounded-xl border border-border p-3 text-center">
@@ -426,7 +463,7 @@ export function Financeiro() {
 
             {/* ═══ CONTAS TAB ═══ */}
             {subTab === "contas" && (
-                <ContasSection contas={contas} addConta={addConta} removeConta={removeConta} toggleContaPaga={toggleContaPaga} />
+                <ContasSection contas={blendedContas} addConta={addConta} removeConta={removeConta} toggleContaPaga={handleToggleContaPaga} />
             )}
 
             {/* ═══ SAÚDE FINANCEIRA TAB ═══ */}
@@ -459,7 +496,7 @@ export function Financeiro() {
                         {[
                             { emoji: saldoMes >= 0 ? "✅" : "⚠️", title: "Resultado Mensal", desc: saldoMes >= 0 ? `Lucro de ${fmt(saldoMes)} este mês.` : `Prejuízo de ${fmt(Math.abs(saldoMes))} este mês.`, ok: saldoMes >= 0 },
                             { emoji: pctFat < 80 ? "✅" : "🚨", title: "Limite Faturamento", desc: `${pctFat.toFixed(0)}% do limite anual (${fmt(receitaAnual)}/${fmt(LIMITE_ANUAL)}).`, ok: pctFat < 80 },
-                            { emoji: contas.filter((c) => !c.pago).length === 0 ? "✅" : "⏰", title: "Contas Pendentes", desc: `${contas.filter((c) => !c.pago).length} conta(s) sem pagamento.`, ok: contas.filter((c) => !c.pago).length === 0 },
+                            { emoji: blendedContas.filter((c) => !c.pago).length === 0 ? "✅" : "⏰", title: "Contas Pendentes", desc: `${blendedContas.filter((c) => !c.pago).length} conta(s) sem pagamento.`, ok: blendedContas.filter((c) => !c.pago).length === 0 },
                             { emoji: receitaMes > despesaMes * 1.3 ? "✅" : "💡", title: "Reserva de Segurança", desc: receitaMes > despesaMes * 1.3 ? "Receita supera despesas em 30%+. Bom ritmo!" : "Receita muito próxima das despesas. Considere reduzir custos.", ok: receitaMes > despesaMes * 1.3 },
                         ].map((card) => (
                             <div key={card.title} className={`rounded-2xl border p-4 ${card.ok ? "border-emerald-200 bg-emerald-50/50" : "border-amber-200 bg-amber-50/50"}`}>
