@@ -12,6 +12,18 @@ interface AuthState {
     syncData: () => Promise<void>;
 }
 
+// Helper: extract only serializable data from the financeiro store (no functions)
+function getFinanceiroData() {
+    const s = useFinanceiroStore.getState();
+    return {
+        transacoes: s.transacoes,
+        metas: s.metas,
+        contas: s.contas,
+        dasHistorico: s.dasHistorico,
+        orcamentos: s.orcamentos,
+    };
+}
+
 export const useAuthStore = create<AuthState>()(
     persist(
         (set, get) => ({
@@ -32,13 +44,21 @@ export const useAuthStore = create<AuthState>()(
                         // Import from remote if exists
                         if (data.empresa) useEmpresaStore.setState({ empresa: data.empresa });
                         if (data.clientes) useClientesStore.setState({ clientes: data.clientes });
-                        if (data.financeiro) useFinanceiroStore.setState(data.financeiro);
+                        if (data.financeiro) {
+                            useFinanceiroStore.setState({
+                                transacoes: data.financeiro.transacoes ?? [],
+                                metas: data.financeiro.metas ?? [],
+                                contas: data.financeiro.contas ?? [],
+                                dasHistorico: data.financeiro.dasHistorico ?? [],
+                                orcamentos: data.financeiro.orcamentos ?? [],
+                            });
+                        }
                     } else {
                         // First time login, push local data to remote
                         await setDoc(userRef, {
                             empresa: useEmpresaStore.getState().empresa,
                             clientes: useClientesStore.getState().clientes,
-                            financeiro: useFinanceiroStore.getState(),
+                            financeiro: getFinanceiroData(),
                             createdAt: new Date().toISOString()
                         }, { merge: true });
                     }
@@ -51,25 +71,25 @@ export const useAuthStore = create<AuthState>()(
     )
 );
 
-// Real-time outward sync
-// Note: Debouncing these in a production app is ideal, but for test/demonstration it syncs per change.
-useEmpresaStore.subscribe((state) => {
+// --- Real-time outward sync (debounced) ---
+let syncTimeout: ReturnType<typeof setTimeout> | null = null;
+function debouncedSync(payload: Record<string, unknown>) {
     const user = useAuthStore.getState().user;
-    if (user) {
-        setDoc(doc(db, "users", user.uid), { empresa: state.empresa }, { merge: true }).catch(console.error);
-    }
+    if (!user) return;
+    if (syncTimeout) clearTimeout(syncTimeout);
+    syncTimeout = setTimeout(() => {
+        setDoc(doc(db, "users", user.uid), payload, { merge: true }).catch(console.error);
+    }, 1500);
+}
+
+useEmpresaStore.subscribe((state) => {
+    debouncedSync({ empresa: state.empresa });
 });
 
 useClientesStore.subscribe((state) => {
-    const user = useAuthStore.getState().user;
-    if (user) {
-        setDoc(doc(db, "users", user.uid), { clientes: state.clientes }, { merge: true }).catch(console.error);
-    }
+    debouncedSync({ clientes: state.clientes });
 });
 
-useFinanceiroStore.subscribe((state) => {
-    const user = useAuthStore.getState().user;
-    if (user) {
-        setDoc(doc(db, "users", user.uid), { financeiro: state }, { merge: true }).catch(console.error);
-    }
+useFinanceiroStore.subscribe(() => {
+    debouncedSync({ financeiro: getFinanceiroData() });
 });
