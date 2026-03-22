@@ -47,27 +47,57 @@ export function Obrigacoes() {
                     {mesesLabels.map((label, idx) => {
                         const mesKey = `${year}-${String(idx + 1).padStart(2, "0")}`;
                         const pago = dasHistorico.find((d) => d.mes === mesKey)?.pago ?? false;
-                        const isPast = idx < now.getMonth() || (idx === now.getMonth() && now.getDate() > 20);
-                        const isCurrent = idx === now.getMonth();
+
+                        let isNaoSeAplica = false;
+                        if (empresa.dataAbertura) {
+                            const [aAno, aMes] = empresa.dataAbertura.split("-").map(Number);
+                            if (year < aAno || (year === aAno && idx < aMes - 1)) {
+                                isNaoSeAplica = true;
+                            }
+                        }
+
+                        const dueDate = new Date(year, idx + 1, 20);
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+
+                        const isAtrasado = !pago && !isNaoSeAplica && today > dueDate;
+                        
+                        let statusIcon = "⬜";
+                        let statusText = "Pendente";
+                        let statusClass = "border-border bg-card";
+
+                        if (isNaoSeAplica) {
+                            statusIcon = "➖";
+                            statusText = "Não se aplica";
+                            statusClass = "border-muted bg-muted/40 opacity-60 cursor-not-allowed";
+                        } else if (pago) {
+                            statusIcon = "✅";
+                            statusText = "Pago";
+                            statusClass = "border-primary/30 bg-primary/10";
+                        } else if (isAtrasado) {
+                            statusIcon = "❌";
+                            statusText = "Atrasado";
+                            statusClass = "border-red-200 bg-red-50 text-red-700";
+                        } else if (today >= new Date(year, idx, 1) && today <= dueDate) {
+                            const nextMonthStr = String(idx + 2 > 12 ? 1 : idx + 2).padStart(2, "0");
+                            statusIcon = "⏰";
+                            statusText = `Vence 20/${nextMonthStr}`;
+                            statusClass = "border-amber-200 bg-amber-50 text-amber-900";
+                        }
+
                         return (
                             <button
                                 key={mesKey}
-                                onClick={() => toggleDas(mesKey)}
-                                className={`rounded-xl border p-3 text-center transition-all hover:scale-105 ${pago
-                                        ? "border-primary/30 bg-primary/10"
-                                        : isPast
-                                            ? "border-red-200 bg-red-50"
-                                            : isCurrent
-                                                ? "border-amber-200 bg-amber-50"
-                                                : "border-border bg-card"
-                                    }`}
+                                disabled={isNaoSeAplica}
+                                onClick={() => !isNaoSeAplica && toggleDas(mesKey)}
+                                className={`rounded-xl border p-3 text-center transition-all ${
+                                    !isNaoSeAplica && "hover:scale-105"
+                                } ${statusClass}`}
                             >
                                 <div className="text-xs font-bold">{label.slice(0, 3)}</div>
-                                <div className="text-lg mt-1">
-                                    {pago ? "✅" : isPast ? "❌" : isCurrent ? "⏰" : "⬜"}
-                                </div>
-                                <div className="text-[10px] text-muted-foreground mt-1">
-                                    {pago ? "Pago" : isPast ? "Atrasado" : isCurrent ? "Vence dia 20" : "Pendente"}
+                                <div className="text-lg mt-1">{statusIcon}</div>
+                                <div className="text-[10px] sm:text-[11px] font-medium mt-1 leading-tight">
+                                    {statusText}
                                 </div>
                             </button>
                         );
