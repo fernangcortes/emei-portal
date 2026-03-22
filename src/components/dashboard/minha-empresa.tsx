@@ -10,6 +10,23 @@ const estados = [
     "SE", "SP", "TO",
 ];
 
+const Field = ({ label, value, onChange, placeholder, type = "text", half = false }: {
+    label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; half?: boolean;
+}) => (
+    <div className={half ? "flex-1 min-w-[140px]" : "w-full"}>
+        <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
+            {label}
+        </label>
+        <input
+            type={type}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            className="w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
+        />
+    </div>
+);
+
 export function MinhaEmpresa() {
     const { empresa, updateEmpresa, updateEndereco } = useEmpresaStore();
     const { geminiApiKey, setGeminiApiKey } = useConfigStore();
@@ -33,23 +50,6 @@ export function MinhaEmpresa() {
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
     };
-
-    const Field = ({ label, value, onChange, placeholder, type = "text", half = false }: {
-        label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; half?: boolean;
-    }) => (
-        <div className={half ? "flex-1 min-w-[140px]" : "w-full"}>
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1.5">
-                {label}
-            </label>
-            <input
-                type={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={placeholder}
-                className="w-full rounded-xl border border-border bg-card px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/40 transition-all"
-            />
-        </div>
-    );
 
     return (
         <div className="space-y-6">

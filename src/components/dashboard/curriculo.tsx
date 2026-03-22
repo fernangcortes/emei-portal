@@ -165,25 +165,25 @@ ${data.redesSociais.length > 0 ? `<div class="section"><h2>Redes Sociais</h2><di
         const html = generateHTML();
         const w = window.open("", "_blank");
         if (w) { w.document.write(html); w.document.close(); setTimeout(() => w.print(), 500); }
-    };
+}
 
-    const Field = ({ label, value, onChange, placeholder, multiline = false, action }: {
-        label: string; value: string; onChange: (v: string) => void; placeholder?: string; multiline?: boolean; action?: ReactNode;
-    }) => (
-        <div>
-            <div className="flex items-center justify-between mb-1">
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{label}</label>
-                {action}
-            </div>
-            {multiline ? (
-                <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={3}
-                    className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none" />
-            ) : (
-                <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
-                    className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-            )}
+const Field = ({ label, value, onChange, placeholder, multiline = false, action }: {
+    label: string; value: string; onChange: (v: string) => void; placeholder?: string; multiline?: boolean; action?: ReactNode;
+}) => (
+    <div>
+        <div className="flex items-center justify-between mb-1">
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{label}</label>
+            {action}
         </div>
-    );
+        {multiline ? (
+            <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={3}
+                className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none" />
+        ) : (
+            <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
+                className="w-full rounded-xl border border-border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+        )}
+    </div>
+);
 
     if (preview) {
         return (
