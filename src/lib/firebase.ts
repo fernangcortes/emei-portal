@@ -1,6 +1,6 @@
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, type Auth } from "firebase/auth";
+import { getFirestore, type Firestore } from "firebase/firestore";
 
 // Configuração do Firebase usando variáveis de ambiente do Next.js
 const firebaseConfig = {
@@ -12,16 +12,38 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Evitar inicializações duplicadas no ambiente de desenvolvimento do Next.js
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+// Lazy initialization — Firebase only starts when actually needed (on client)
+// This prevents crashes during Next.js SSR/build when env vars are unavailable.
+let _app: FirebaseApp | null = null;
+let _auth: Auth | null = null;
+let _db: Firestore | null = null;
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+function getApp(): FirebaseApp {
+    if (!_app) {
+        if (!firebaseConfig.apiKey) {
+            throw new Error("Firebase API Key não configurada. Verifique suas variáveis de ambiente.");
+        }
+        _app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    }
+    return _app;
+}
+
+// Exported getters — safe to call from any component
+export function getFirebaseAuth(): Auth {
+    if (!_auth) _auth = getAuth(getApp());
+    return _auth;
+}
+
+export function getFirebaseDb(): Firestore {
+    if (!_db) _db = getFirestore(getApp());
+    return _db;
+}
+
 const googleProvider = new GoogleAuthProvider();
 
 export const loginWithGoogle = async () => {
     try {
-        const result = await signInWithPopup(auth, googleProvider);
+        const result = await signInWithPopup(getFirebaseAuth(), googleProvider);
         return result.user;
     } catch (error) {
         console.error("Erro ao fazer login com o Google:", error);
@@ -31,11 +53,18 @@ export const loginWithGoogle = async () => {
 
 export const logoutGoogle = async () => {
     try {
-        await signOut(auth);
+        await signOut(getFirebaseAuth());
     } catch (error) {
         console.error("Erro ao fazer logout:", error);
         throw error;
     }
 };
 
-export { app, auth, db };
+// Backward compatibility aliases
+export const auth = new Proxy({} as Auth, {
+    get: (_, prop) => (getFirebaseAuth() as any)[prop],
+});
+
+export const db = new Proxy({} as Firestore, {
+    get: (_, prop) => (getFirebaseDb() as any)[prop],
+});
