@@ -89,7 +89,7 @@ export function Obrigacoes() {
                             <button
                                 key={mesKey}
                                 disabled={isNaoSeAplica}
-                                onClick={() => !isNaoSeAplica && toggleDas(mesKey)}
+                                onClick={() => !isNaoSeAplica && toggleDas(mesKey, dasValue)}
                                 className={`rounded-xl border p-3 text-center transition-all ${
                                     !isNaoSeAplica && "hover:scale-105"
                                 } ${statusClass}`}

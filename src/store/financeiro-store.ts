@@ -58,7 +58,7 @@ interface FinanceiroState {
     addConta: (c: Omit<ContaPendenteItem, "id">) => void;
     removeConta: (id: string) => void;
     toggleContaPaga: (id: string) => void;
-    toggleDas: (mes: string) => void;
+    toggleDas: (mes: string, dasValue: number) => void;
     setOrcamentos: (o: OrcamentoMensal[]) => void;
     resetFinanceiro: () => void;
 }
@@ -105,20 +105,44 @@ export const useFinanceiroStore = create<FinanceiroState>()(
                     ),
                 })),
 
-            toggleDas: (mes) =>
+            toggleDas: (mes, dasValue) =>
                 set((s) => {
+                    const currentDate = new Date().toISOString().slice(0, 10);
                     const exists = s.dasHistorico.find((d) => d.mes === mes);
+                    const willBePaid = exists ? !exists.pago : true;
+
+                    let newTransacoes = s.transacoes;
+                    const dasTxId = `das-${mes}`;
+                    
+                    if (willBePaid) {
+                        const transacao: Transacao = {
+                            id: dasTxId,
+                            tipo: "despesa",
+                            valor: dasValue,
+                            descricao: `Imposto DAS MEI - ${mes}`,
+                            categoria: "Impostos",
+                            data: currentDate,
+                            pago: true,
+                            formaPagamento: "boleto",
+                        };
+                        newTransacoes = [transacao, ...s.transacoes.filter(t => t.id !== dasTxId)];
+                    } else {
+                        newTransacoes = s.transacoes.filter(t => t.id !== dasTxId);
+                    }
+
                     if (exists) {
                         return {
+                            transacoes: newTransacoes,
                             dasHistorico: s.dasHistorico.map((d) =>
-                                d.mes === mes ? { ...d, pago: !d.pago } : d
+                                d.mes === mes ? { ...d, pago: willBePaid } : d
                             ),
                         };
                     }
                     return {
+                        transacoes: newTransacoes,
                         dasHistorico: [
                             ...s.dasHistorico,
-                            { mes, pago: true, dataPagamento: new Date().toISOString().slice(0, 10) },
+                            { mes, pago: willBePaid, dataPagamento: currentDate },
                         ],
                     };
                 }),
